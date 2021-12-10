@@ -60,8 +60,37 @@ public ArrayList<ArrayList<Integer>> permute(ArrayList<Integer> a) {
     }
     public static void helper(ArrayList<Integer> a,ArrayList<Integer>sans,boolean[]vis,ArrayList<ArrayList<Integer>>ans){
         if(sans.size()==a.size()){
-            // System.out.println(a.size());
             ArrayList<Integer> myAns = new ArrayList<>(sans);
+            ans.add(myAns);
+            return;
+        }
+        for(int j=0;j<a.size();j++){
+            if(!vis[j]){
+            vis[j]=true;
+            sans.add(a.get(j));
+            helper(a,sans,vis,ans);
+            sans.remove(sans.size()-1);
+            vis[j]=false;
+            }
+        }
+        
+    }
+
+//unique permutations==========================================================================
+
+public ArrayList<ArrayList<Integer>> permute(ArrayList<Integer> a) {
+        ArrayList<ArrayList<Integer>>ans=new ArrayList<>();    
+        boolean[]vis=new boolean[a.size()];
+        helper(a , new ArrayList<>() , vis , ans);
+        return ans;
+         
+    }
+    public static void helper(ArrayList<Integer> a,ArrayList<Integer>sans,boolean[]vis,ArrayList<ArrayList<Integer>>ans){
+        if(sans.size()==a.size()){
+            ArrayList<Integer> myAns = new ArrayList<>(sans);
+            if(ans.contains(myAns)){
+                return;
+            }
             ans.add(myAns);
             return;
         }
