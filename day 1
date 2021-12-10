@@ -1,4 +1,5 @@
 //maxsum contigous sub array or kadane algo
+
 public int maxSubArray(final List<Integer> a) {
         int maxsum=-(int)1e9;
         int s=0;
@@ -12,4 +13,37 @@ public int maxSubArray(final List<Integer> a) {
             
         }
         return maxsum;
+    }
+ 
+ //spiral order matrix 1=================================
+ 
+ public ArrayList<Integer> spiralOrder(final List<ArrayList<Integer>> a) {
+    ArrayList<Integer>ans=new ArrayList<>();
+    int minr=0;
+    int minc=0;
+    int maxr=a.size()-1;
+    int maxc=a.get(0).size()-1;
+    int te=(maxr+1)*(maxc+1);
+    while(te>0){
+      for(int i=minr,j=minc;j<=maxc && te>0;j++){
+          ans.add(a.get(i).get(j));te--;
+      }
+      minr++;
+
+      for(int i=minr,j=maxc;i<=maxr && te>0;i++){
+          ans.add(a.get(i).get(j));te--;
+      }
+      maxc--;
+      for(int i=maxr,j=maxc;j>=minc && te>0;j--){
+          ans.add(a.get(i).get(j));te--;
+      }
+      maxr--;
+      
+      for(int i=maxr,j=minc;i>=minr && te>0;i--){
+          ans.add(a.get(i).get(j));te--;
+      }
+      minc++;
+
+    }
+    return ans;
     }
