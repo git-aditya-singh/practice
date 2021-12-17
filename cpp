@@ -28,7 +28,7 @@ public:
                     bool valid=isvalid(grid1,grid2,i,j,n,m);
                     
                     if(valid){
-                        cout<<i<<" "<<j<<"\n";
+                       
                         count++;
                     }
                 }
