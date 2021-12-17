@@ -88,3 +88,49 @@ public:
     }
 };
 
+//  min cost to connect all points============================================================
+
+class Solution {
+public:
+    vector<int>par;
+    
+    int findpar(int v){
+        if(par[v]==v){
+            return v;
+        }
+        return par[v]=findpar(par[v]);
+    }
+    
+    int findist(vector<int>&po1,vector<int>&po2){
+        return abs(po1[0]-po2[0])+abs(po1[1]-po2[1]);
+    }
+    int minCostConnectPoints(vector<vector<int>>& points) {
+        int n=points.size();
+        
+        for(int i=0;i<n;i++){
+            par.push_back(i);
+        }
+        vector<vector<int>>edges;
+        for(int i=0;i<n;i++)
+        {   
+            for(int j=i+1;j<n;j++){
+               int w=findist(points[i],points[j]);
+                edges.push_back({w,i,j});
+            }      
+        }
+        sort(edges.begin(),edges.end());
+        int cost=0;
+        for(auto &e:edges){
+            int u=e[1];
+            int v=e[2];
+            int p1=findpar(u);
+            int p2=findpar(v);
+            if(p1!=p2){
+                par[p1]=p2;
+                cost+=e[0];
+            }
+        }
+        return cost;
+    }
+};
+
